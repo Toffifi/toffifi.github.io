@@ -100,24 +100,6 @@ if (true) {
 /* 1 */
 /***/ (function(module, exports, __webpack_require__) {
 
-/**
- * Copyright (c) 2013-present, Facebook, Inc.
- *
- * This source code is licensed under the MIT license found in the
- * LICENSE file in the root directory of this source tree.
- */
-
-if (false) { var throwOnDirectAccess, ReactIs; } else {
-  // By explicitly using `prop-types` you are opting into new production behavior.
-  // http://fb.me/prop-types-in-prod
-  module.exports = __webpack_require__(106)();
-}
-
-
-/***/ }),
-/* 2 */
-/***/ (function(module, exports, __webpack_require__) {
-
 "use strict";
 
 
@@ -167,6 +149,24 @@ var ReactCSS = exports.ReactCSS = function ReactCSS(classes) {
 };
 
 exports.default = ReactCSS;
+
+/***/ }),
+/* 2 */
+/***/ (function(module, exports, __webpack_require__) {
+
+/**
+ * Copyright (c) 2013-present, Facebook, Inc.
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
+if (false) { var throwOnDirectAccess, ReactIs; } else {
+  // By explicitly using `prop-types` you are opting into new production behavior.
+  // http://fb.me/prop-types-in-prod
+  module.exports = __webpack_require__(106)();
+}
+
 
 /***/ }),
 /* 3 */
@@ -369,148 +369,6 @@ module.exports = isObject;
 
 /***/ }),
 /* 7 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var freeGlobal = __webpack_require__(61);
-
-/** Detect free variable `self`. */
-var freeSelf = typeof self == 'object' && self && self.Object === Object && self;
-
-/** Used as a reference to the global object. */
-var root = freeGlobal || freeSelf || Function('return this')();
-
-module.exports = root;
-
-
-/***/ }),
-/* 8 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.red = exports.getContrastingColor = exports.isValidHex = exports.toState = exports.simpleCheckForValidColor = undefined;
-
-var _each = __webpack_require__(246);
-
-var _each2 = _interopRequireDefault(_each);
-
-var _tinycolor = __webpack_require__(248);
-
-var _tinycolor2 = _interopRequireDefault(_tinycolor);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-var simpleCheckForValidColor = exports.simpleCheckForValidColor = function simpleCheckForValidColor(data) {
-  var keysToCheck = ['r', 'g', 'b', 'a', 'h', 's', 'l', 'v'];
-  var checked = 0;
-  var passed = 0;
-  (0, _each2.default)(keysToCheck, function (letter) {
-    if (data[letter]) {
-      checked += 1;
-      if (!isNaN(data[letter])) {
-        passed += 1;
-      }
-      if (letter === 's' || letter === 'l') {
-        var percentPatt = /^\d+%$/;
-        if (percentPatt.test(data[letter])) {
-          passed += 1;
-        }
-      }
-    }
-  });
-  return checked === passed ? data : false;
-};
-
-var toState = exports.toState = function toState(data, oldHue) {
-  var color = data.hex ? (0, _tinycolor2.default)(data.hex) : (0, _tinycolor2.default)(data);
-  var hsl = color.toHsl();
-  var hsv = color.toHsv();
-  var rgb = color.toRgb();
-  var hex = color.toHex();
-  if (hsl.s === 0) {
-    hsl.h = oldHue || 0;
-    hsv.h = oldHue || 0;
-  }
-  var transparent = hex === '000000' && rgb.a === 0;
-
-  return {
-    hsl: hsl,
-    hex: transparent ? 'transparent' : '#' + hex,
-    rgb: rgb,
-    hsv: hsv,
-    oldHue: data.h || oldHue || hsl.h,
-    source: data.source
-  };
-};
-
-var isValidHex = exports.isValidHex = function isValidHex(hex) {
-  // disable hex4 and hex8
-  var lh = String(hex).charAt(0) === '#' ? 1 : 0;
-  return hex.length !== 4 + lh && hex.length < 7 + lh && (0, _tinycolor2.default)(hex).isValid();
-};
-
-var getContrastingColor = exports.getContrastingColor = function getContrastingColor(data) {
-  if (!data) {
-    return '#fff';
-  }
-  var col = toState(data);
-  if (col.hex === 'transparent') {
-    return 'rgba(0,0,0,0.4)';
-  }
-  var yiq = (col.rgb.r * 299 + col.rgb.g * 587 + col.rgb.b * 114) / 1000;
-  return yiq >= 128 ? '#000' : '#fff';
-};
-
-var red = exports.red = {
-  hsl: { a: 1, h: 0, l: 0.5, s: 1 },
-  hex: '#ff0000',
-  rgb: { r: 255, g: 0, b: 0, a: 1 },
-  hsv: { h: 0, s: 1, v: 1, a: 1 }
-};
-
-exports.default = exports;
-
-/***/ }),
-/* 9 */
-/***/ (function(module, exports) {
-
-/**
- * Checks if `value` is object-like. A value is object-like if it's not `null`
- * and has a `typeof` result of "object".
- *
- * @static
- * @memberOf _
- * @since 4.0.0
- * @category Lang
- * @param {*} value The value to check.
- * @returns {boolean} Returns `true` if `value` is object-like, else `false`.
- * @example
- *
- * _.isObjectLike({});
- * // => true
- *
- * _.isObjectLike([1, 2, 3]);
- * // => true
- *
- * _.isObjectLike(_.noop);
- * // => false
- *
- * _.isObjectLike(null);
- * // => false
- */
-function isObjectLike(value) {
-  return value != null && typeof value == 'object';
-}
-
-module.exports = isObjectLike;
-
-
-/***/ }),
-/* 10 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -1172,6 +1030,148 @@ if (false) {}
 
 
 /***/ }),
+/* 8 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var freeGlobal = __webpack_require__(61);
+
+/** Detect free variable `self`. */
+var freeSelf = typeof self == 'object' && self && self.Object === Object && self;
+
+/** Used as a reference to the global object. */
+var root = freeGlobal || freeSelf || Function('return this')();
+
+module.exports = root;
+
+
+/***/ }),
+/* 9 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.red = exports.getContrastingColor = exports.isValidHex = exports.toState = exports.simpleCheckForValidColor = undefined;
+
+var _each = __webpack_require__(246);
+
+var _each2 = _interopRequireDefault(_each);
+
+var _tinycolor = __webpack_require__(248);
+
+var _tinycolor2 = _interopRequireDefault(_tinycolor);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var simpleCheckForValidColor = exports.simpleCheckForValidColor = function simpleCheckForValidColor(data) {
+  var keysToCheck = ['r', 'g', 'b', 'a', 'h', 's', 'l', 'v'];
+  var checked = 0;
+  var passed = 0;
+  (0, _each2.default)(keysToCheck, function (letter) {
+    if (data[letter]) {
+      checked += 1;
+      if (!isNaN(data[letter])) {
+        passed += 1;
+      }
+      if (letter === 's' || letter === 'l') {
+        var percentPatt = /^\d+%$/;
+        if (percentPatt.test(data[letter])) {
+          passed += 1;
+        }
+      }
+    }
+  });
+  return checked === passed ? data : false;
+};
+
+var toState = exports.toState = function toState(data, oldHue) {
+  var color = data.hex ? (0, _tinycolor2.default)(data.hex) : (0, _tinycolor2.default)(data);
+  var hsl = color.toHsl();
+  var hsv = color.toHsv();
+  var rgb = color.toRgb();
+  var hex = color.toHex();
+  if (hsl.s === 0) {
+    hsl.h = oldHue || 0;
+    hsv.h = oldHue || 0;
+  }
+  var transparent = hex === '000000' && rgb.a === 0;
+
+  return {
+    hsl: hsl,
+    hex: transparent ? 'transparent' : '#' + hex,
+    rgb: rgb,
+    hsv: hsv,
+    oldHue: data.h || oldHue || hsl.h,
+    source: data.source
+  };
+};
+
+var isValidHex = exports.isValidHex = function isValidHex(hex) {
+  // disable hex4 and hex8
+  var lh = String(hex).charAt(0) === '#' ? 1 : 0;
+  return hex.length !== 4 + lh && hex.length < 7 + lh && (0, _tinycolor2.default)(hex).isValid();
+};
+
+var getContrastingColor = exports.getContrastingColor = function getContrastingColor(data) {
+  if (!data) {
+    return '#fff';
+  }
+  var col = toState(data);
+  if (col.hex === 'transparent') {
+    return 'rgba(0,0,0,0.4)';
+  }
+  var yiq = (col.rgb.r * 299 + col.rgb.g * 587 + col.rgb.b * 114) / 1000;
+  return yiq >= 128 ? '#000' : '#fff';
+};
+
+var red = exports.red = {
+  hsl: { a: 1, h: 0, l: 0.5, s: 1 },
+  hex: '#ff0000',
+  rgb: { r: 255, g: 0, b: 0, a: 1 },
+  hsv: { h: 0, s: 1, v: 1, a: 1 }
+};
+
+exports.default = exports;
+
+/***/ }),
+/* 10 */
+/***/ (function(module, exports) {
+
+/**
+ * Checks if `value` is object-like. A value is object-like if it's not `null`
+ * and has a `typeof` result of "object".
+ *
+ * @static
+ * @memberOf _
+ * @since 4.0.0
+ * @category Lang
+ * @param {*} value The value to check.
+ * @returns {boolean} Returns `true` if `value` is object-like, else `false`.
+ * @example
+ *
+ * _.isObjectLike({});
+ * // => true
+ *
+ * _.isObjectLike([1, 2, 3]);
+ * // => true
+ *
+ * _.isObjectLike(_.noop);
+ * // => false
+ *
+ * _.isObjectLike(null);
+ * // => false
+ */
+function isObjectLike(value) {
+  return value != null && typeof value == 'object';
+}
+
+module.exports = isObjectLike;
+
+
+/***/ }),
 /* 11 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -1382,7 +1382,7 @@ module.exports = isArrayLike;
 /* 16 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var root = __webpack_require__(7);
+var root = __webpack_require__(8);
 
 /** Built-in value references. */
 var Symbol = root.Symbol;
@@ -1696,7 +1696,7 @@ module.exports = g;
 /* 23 */
 /***/ (function(module, exports, __webpack_require__) {
 
-/* WEBPACK VAR INJECTION */(function(module) {var root = __webpack_require__(7),
+/* WEBPACK VAR INJECTION */(function(module) {var root = __webpack_require__(8),
     stubFalse = __webpack_require__(132);
 
 /** Detect free variable `exports`. */
@@ -1967,7 +1967,7 @@ module.exports = getTag;
 /***/ (function(module, exports, __webpack_require__) {
 
 var baseGetTag = __webpack_require__(13),
-    isObjectLike = __webpack_require__(9);
+    isObjectLike = __webpack_require__(10);
 
 /** `Object#toString` result references. */
 var symbolTag = '[object Symbol]';
@@ -2136,7 +2136,7 @@ module.exports = forOwn;
 /***/ (function(module, exports, __webpack_require__) {
 
 var baseIsArguments = __webpack_require__(131),
-    isObjectLike = __webpack_require__(9);
+    isObjectLike = __webpack_require__(10);
 
 /** Used for built-in method references. */
 var objectProto = Object.prototype;
@@ -2447,7 +2447,7 @@ module.exports = getPrototype;
 /***/ (function(module, exports, __webpack_require__) {
 
 var getNative = __webpack_require__(14),
-    root = __webpack_require__(7);
+    root = __webpack_require__(8);
 
 /* Built-in method references that are verified to be native. */
 var Map = getNative(root, 'Map');
@@ -2633,7 +2633,7 @@ var _react = __webpack_require__(0);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _reactcss = __webpack_require__(2);
+var _reactcss = __webpack_require__(1);
 
 var _reactcss2 = _interopRequireDefault(_reactcss);
 
@@ -3551,7 +3551,7 @@ module.exports = castFunction;
 
 var baseGetTag = __webpack_require__(13),
     getPrototype = __webpack_require__(46),
-    isObjectLike = __webpack_require__(9);
+    isObjectLike = __webpack_require__(10);
 
 /** `Object#toString` result references. */
 var objectTag = '[object Object]';
@@ -3677,7 +3677,7 @@ module.exports = toSource;
 /***/ (function(module, exports, __webpack_require__) {
 
 var baseIsEqualDeep = __webpack_require__(165),
-    isObjectLike = __webpack_require__(9);
+    isObjectLike = __webpack_require__(10);
 
 /**
  * The base implementation of `_.isEqual` which supports partial comparisons
@@ -3799,7 +3799,7 @@ module.exports = equalArrays;
 /* 72 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var root = __webpack_require__(7);
+var root = __webpack_require__(8);
 
 /** Built-in value references. */
 var Uint8Array = root.Uint8Array;
@@ -4117,7 +4117,7 @@ module.exports = defineProperty;
 /* 85 */
 /***/ (function(module, exports, __webpack_require__) {
 
-/* WEBPACK VAR INJECTION */(function(module) {var root = __webpack_require__(7);
+/* WEBPACK VAR INJECTION */(function(module) {var root = __webpack_require__(8);
 
 /** Detect free variable `exports`. */
 var freeExports =  true && exports && !exports.nodeType && exports;
@@ -4527,7 +4527,7 @@ var _debounce = __webpack_require__(92);
 
 var _debounce2 = _interopRequireDefault(_debounce);
 
-var _color = __webpack_require__(8);
+var _color = __webpack_require__(9);
 
 var _color2 = _interopRequireDefault(_color);
 
@@ -4742,7 +4742,7 @@ function symbolObservablePonyfill(root) {
 "use strict";
 
 
-var compose = __webpack_require__(10).compose;
+var compose = __webpack_require__(7).compose;
 
 exports.__esModule = true;
 exports.composeWithDevTools = (
@@ -5498,7 +5498,7 @@ var _reactDom = __webpack_require__(20);
 
 var _reactDom2 = _interopRequireDefault(_reactDom);
 
-var _propTypes = __webpack_require__(1);
+var _propTypes = __webpack_require__(2);
 
 var _propTypes2 = _interopRequireDefault(_propTypes);
 
@@ -5767,7 +5767,7 @@ var _react = __webpack_require__(0);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _propTypes = __webpack_require__(1);
+var _propTypes = __webpack_require__(2);
 
 var _propTypes2 = _interopRequireDefault(_propTypes);
 
@@ -6799,7 +6799,7 @@ exports.default = flattenNames;
 
 var baseGetTag = __webpack_require__(13),
     isArray = __webpack_require__(4),
-    isObjectLike = __webpack_require__(9);
+    isObjectLike = __webpack_require__(10);
 
 /** `Object#toString` result references. */
 var stringTag = '[object String]';
@@ -6971,7 +6971,7 @@ module.exports = baseTimes;
 /***/ (function(module, exports, __webpack_require__) {
 
 var baseGetTag = __webpack_require__(13),
-    isObjectLike = __webpack_require__(9);
+    isObjectLike = __webpack_require__(10);
 
 /** `Object#toString` result references. */
 var argsTag = '[object Arguments]';
@@ -7020,7 +7020,7 @@ module.exports = stubFalse;
 
 var baseGetTag = __webpack_require__(13),
     isLength = __webpack_require__(41),
-    isObjectLike = __webpack_require__(9);
+    isObjectLike = __webpack_require__(10);
 
 /** `Object#toString` result references. */
 var argsTag = '[object Arguments]',
@@ -7608,7 +7608,7 @@ module.exports = isMasked;
 /* 151 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var root = __webpack_require__(7);
+var root = __webpack_require__(8);
 
 /** Used to detect overreaching core-js shims. */
 var coreJsData = root['__core-js_shared__'];
@@ -8467,7 +8467,7 @@ module.exports = arrayFilter;
 /***/ (function(module, exports, __webpack_require__) {
 
 var getNative = __webpack_require__(14),
-    root = __webpack_require__(7);
+    root = __webpack_require__(8);
 
 /* Built-in method references that are verified to be native. */
 var DataView = getNative(root, 'DataView');
@@ -8480,7 +8480,7 @@ module.exports = DataView;
 /***/ (function(module, exports, __webpack_require__) {
 
 var getNative = __webpack_require__(14),
-    root = __webpack_require__(7);
+    root = __webpack_require__(8);
 
 /* Built-in method references that are verified to be native. */
 var Promise = getNative(root, 'Promise');
@@ -8493,7 +8493,7 @@ module.exports = Promise;
 /***/ (function(module, exports, __webpack_require__) {
 
 var getNative = __webpack_require__(14),
-    root = __webpack_require__(7);
+    root = __webpack_require__(8);
 
 /* Built-in method references that are verified to be native. */
 var Set = getNative(root, 'Set');
@@ -8506,7 +8506,7 @@ module.exports = Set;
 /***/ (function(module, exports, __webpack_require__) {
 
 var getNative = __webpack_require__(14),
-    root = __webpack_require__(7);
+    root = __webpack_require__(8);
 
 /* Built-in method references that are verified to be native. */
 var WeakMap = getNative(root, 'WeakMap');
@@ -9788,7 +9788,7 @@ module.exports = isMap;
 /***/ (function(module, exports, __webpack_require__) {
 
 var getTag = __webpack_require__(30),
-    isObjectLike = __webpack_require__(9);
+    isObjectLike = __webpack_require__(10);
 
 /** `Object#toString` result references. */
 var mapTag = '[object Map]';
@@ -9845,7 +9845,7 @@ module.exports = isSet;
 /***/ (function(module, exports, __webpack_require__) {
 
 var getTag = __webpack_require__(30),
-    isObjectLike = __webpack_require__(9);
+    isObjectLike = __webpack_require__(10);
 
 /** `Object#toString` result references. */
 var setTag = '[object Set]';
@@ -10166,7 +10166,7 @@ var _react = __webpack_require__(0);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _reactcss = __webpack_require__(2);
+var _reactcss = __webpack_require__(1);
 
 var _reactcss2 = _interopRequireDefault(_reactcss);
 
@@ -10248,7 +10248,7 @@ var _react = __webpack_require__(0);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _reactcss = __webpack_require__(2);
+var _reactcss = __webpack_require__(1);
 
 var _reactcss2 = _interopRequireDefault(_reactcss);
 
@@ -10518,7 +10518,7 @@ var _react = __webpack_require__(0);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _reactcss = __webpack_require__(2);
+var _reactcss = __webpack_require__(1);
 
 var _reactcss2 = _interopRequireDefault(_reactcss);
 
@@ -10726,7 +10726,7 @@ var _react = __webpack_require__(0);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _reactcss = __webpack_require__(2);
+var _reactcss = __webpack_require__(1);
 
 var _reactcss2 = _interopRequireDefault(_reactcss);
 
@@ -10938,11 +10938,11 @@ var _react = __webpack_require__(0);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _propTypes = __webpack_require__(1);
+var _propTypes = __webpack_require__(2);
 
 var _propTypes2 = _interopRequireDefault(_propTypes);
 
-var _reactcss = __webpack_require__(2);
+var _reactcss = __webpack_require__(1);
 
 var _reactcss2 = _interopRequireDefault(_reactcss);
 
@@ -11200,7 +11200,7 @@ module.exports = baseMergeDeep;
 /***/ (function(module, exports, __webpack_require__) {
 
 var isArrayLike = __webpack_require__(15),
-    isObjectLike = __webpack_require__(9);
+    isObjectLike = __webpack_require__(10);
 
 /**
  * This method is like `_.isArrayLike` except that it also checks if `value`
@@ -11584,7 +11584,7 @@ var _react = __webpack_require__(0);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _reactcss = __webpack_require__(2);
+var _reactcss = __webpack_require__(1);
 
 var _reactcss2 = _interopRequireDefault(_reactcss);
 
@@ -11812,7 +11812,7 @@ module.exports = throttle;
 /* 243 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var root = __webpack_require__(7);
+var root = __webpack_require__(8);
 
 /**
  * Gets the timestamp of the number of milliseconds that have elapsed since
@@ -13223,7 +13223,7 @@ var _react = __webpack_require__(0);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _reactcss = __webpack_require__(2);
+var _reactcss = __webpack_require__(1);
 
 var _reactcss2 = _interopRequireDefault(_reactcss);
 
@@ -13381,7 +13381,7 @@ var _react = __webpack_require__(0);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _reactcss = __webpack_require__(2);
+var _reactcss = __webpack_require__(1);
 
 var _reactcss2 = _interopRequireDefault(_reactcss);
 
@@ -13429,11 +13429,11 @@ var _react = __webpack_require__(0);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _propTypes = __webpack_require__(1);
+var _propTypes = __webpack_require__(2);
 
 var _propTypes2 = _interopRequireDefault(_propTypes);
 
-var _reactcss = __webpack_require__(2);
+var _reactcss = __webpack_require__(1);
 
 var _reactcss2 = _interopRequireDefault(_reactcss);
 
@@ -13441,7 +13441,7 @@ var _merge = __webpack_require__(5);
 
 var _merge2 = _interopRequireDefault(_merge);
 
-var _color = __webpack_require__(8);
+var _color = __webpack_require__(9);
 
 var _color2 = _interopRequireDefault(_color);
 
@@ -13589,7 +13589,7 @@ var _react = __webpack_require__(0);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _reactcss = __webpack_require__(2);
+var _reactcss = __webpack_require__(1);
 
 var _reactcss2 = _interopRequireDefault(_reactcss);
 
@@ -13662,11 +13662,11 @@ var _react = __webpack_require__(0);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _propTypes = __webpack_require__(1);
+var _propTypes = __webpack_require__(2);
 
 var _propTypes2 = _interopRequireDefault(_propTypes);
 
-var _reactcss = __webpack_require__(2);
+var _reactcss = __webpack_require__(1);
 
 var _reactcss2 = _interopRequireDefault(_reactcss);
 
@@ -13771,7 +13771,7 @@ var _react = __webpack_require__(0);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _reactcss = __webpack_require__(2);
+var _reactcss = __webpack_require__(1);
 
 var _reactcss2 = _interopRequireDefault(_reactcss);
 
@@ -13853,11 +13853,11 @@ var _react = __webpack_require__(0);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _propTypes = __webpack_require__(1);
+var _propTypes = __webpack_require__(2);
 
 var _propTypes2 = _interopRequireDefault(_propTypes);
 
-var _reactcss = __webpack_require__(2);
+var _reactcss = __webpack_require__(1);
 
 var _reactcss2 = _interopRequireDefault(_reactcss);
 
@@ -14076,11 +14076,11 @@ var _react = __webpack_require__(0);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _reactcss = __webpack_require__(2);
+var _reactcss = __webpack_require__(1);
 
 var _reactcss2 = _interopRequireDefault(_reactcss);
 
-var _color = __webpack_require__(8);
+var _color = __webpack_require__(9);
 
 var _color2 = _interopRequireDefault(_color);
 
@@ -14469,7 +14469,7 @@ var _react = __webpack_require__(0);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _reactcss = __webpack_require__(2);
+var _reactcss = __webpack_require__(1);
 
 var _reactcss2 = _interopRequireDefault(_reactcss);
 
@@ -14510,7 +14510,7 @@ var _react = __webpack_require__(0);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _reactcss = __webpack_require__(2);
+var _reactcss = __webpack_require__(1);
 
 var _reactcss2 = _interopRequireDefault(_reactcss);
 
@@ -14550,11 +14550,11 @@ var _react = __webpack_require__(0);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _propTypes = __webpack_require__(1);
+var _propTypes = __webpack_require__(2);
 
 var _propTypes2 = _interopRequireDefault(_propTypes);
 
-var _reactcss = __webpack_require__(2);
+var _reactcss = __webpack_require__(1);
 
 var _reactcss2 = _interopRequireDefault(_reactcss);
 
@@ -14566,7 +14566,7 @@ var _merge = __webpack_require__(5);
 
 var _merge2 = _interopRequireDefault(_merge);
 
-var _color = __webpack_require__(8);
+var _color = __webpack_require__(9);
 
 var _color2 = _interopRequireDefault(_color);
 
@@ -14675,11 +14675,11 @@ var _react = __webpack_require__(0);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _reactcss = __webpack_require__(2);
+var _reactcss = __webpack_require__(1);
 
 var _reactcss2 = _interopRequireDefault(_reactcss);
 
-var _color = __webpack_require__(8);
+var _color = __webpack_require__(9);
 
 var _color2 = _interopRequireDefault(_color);
 
@@ -14764,7 +14764,7 @@ var _react = __webpack_require__(0);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _reactcss = __webpack_require__(2);
+var _reactcss = __webpack_require__(1);
 
 var _reactcss2 = _interopRequireDefault(_reactcss);
 
@@ -14903,11 +14903,11 @@ var _react = __webpack_require__(0);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _propTypes = __webpack_require__(1);
+var _propTypes = __webpack_require__(2);
 
 var _propTypes2 = _interopRequireDefault(_propTypes);
 
-var _reactcss = __webpack_require__(2);
+var _reactcss = __webpack_require__(1);
 
 var _reactcss2 = _interopRequireDefault(_reactcss);
 
@@ -15074,7 +15074,7 @@ var _react = __webpack_require__(0);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _reactcss = __webpack_require__(2);
+var _reactcss = __webpack_require__(1);
 
 var _reactcss2 = _interopRequireDefault(_reactcss);
 
@@ -15140,11 +15140,11 @@ var _react = __webpack_require__(0);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _propTypes = __webpack_require__(1);
+var _propTypes = __webpack_require__(2);
 
 var _propTypes2 = _interopRequireDefault(_propTypes);
 
-var _reactcss = __webpack_require__(2);
+var _reactcss = __webpack_require__(1);
 
 var _reactcss2 = _interopRequireDefault(_reactcss);
 
@@ -15231,7 +15231,7 @@ var _react = __webpack_require__(0);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _reactcss = __webpack_require__(2);
+var _reactcss = __webpack_require__(1);
 
 var _reactcss2 = _interopRequireDefault(_reactcss);
 
@@ -15279,7 +15279,7 @@ var _react = __webpack_require__(0);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _reactcss = __webpack_require__(2);
+var _reactcss = __webpack_require__(1);
 
 var _reactcss2 = _interopRequireDefault(_reactcss);
 
@@ -15287,7 +15287,7 @@ var _merge = __webpack_require__(5);
 
 var _merge2 = _interopRequireDefault(_merge);
 
-var _color = __webpack_require__(8);
+var _color = __webpack_require__(9);
 
 var _color2 = _interopRequireDefault(_color);
 
@@ -15456,11 +15456,11 @@ var _react = __webpack_require__(0);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _propTypes = __webpack_require__(1);
+var _propTypes = __webpack_require__(2);
 
 var _propTypes2 = _interopRequireDefault(_propTypes);
 
-var _reactcss = __webpack_require__(2);
+var _reactcss = __webpack_require__(1);
 
 var _reactcss2 = _interopRequireDefault(_reactcss);
 
@@ -15673,11 +15673,11 @@ var _react = __webpack_require__(0);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _reactcss = __webpack_require__(2);
+var _reactcss = __webpack_require__(1);
 
 var _reactcss2 = _interopRequireDefault(_reactcss);
 
-var _color = __webpack_require__(8);
+var _color = __webpack_require__(9);
 
 var _color2 = _interopRequireDefault(_color);
 
@@ -15872,7 +15872,7 @@ var _react = __webpack_require__(0);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _reactcss = __webpack_require__(2);
+var _reactcss = __webpack_require__(1);
 
 var _reactcss2 = _interopRequireDefault(_reactcss);
 
@@ -15919,7 +15919,7 @@ var _react = __webpack_require__(0);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _reactcss = __webpack_require__(2);
+var _reactcss = __webpack_require__(1);
 
 var _reactcss2 = _interopRequireDefault(_reactcss);
 
@@ -16000,7 +16000,7 @@ var _react = __webpack_require__(0);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _reactcss = __webpack_require__(2);
+var _reactcss = __webpack_require__(1);
 
 var _reactcss2 = _interopRequireDefault(_reactcss);
 
@@ -16060,7 +16060,7 @@ var _react = __webpack_require__(0);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _reactcss = __webpack_require__(2);
+var _reactcss = __webpack_require__(1);
 
 var _reactcss2 = _interopRequireDefault(_reactcss);
 
@@ -16138,11 +16138,11 @@ var _react = __webpack_require__(0);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _propTypes = __webpack_require__(1);
+var _propTypes = __webpack_require__(2);
 
 var _propTypes2 = _interopRequireDefault(_propTypes);
 
-var _reactcss = __webpack_require__(2);
+var _reactcss = __webpack_require__(1);
 
 var _reactcss2 = _interopRequireDefault(_reactcss);
 
@@ -16346,11 +16346,11 @@ var _react = __webpack_require__(0);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _reactcss = __webpack_require__(2);
+var _reactcss = __webpack_require__(1);
 
 var _reactcss2 = _interopRequireDefault(_reactcss);
 
-var _color = __webpack_require__(8);
+var _color = __webpack_require__(9);
 
 var _color2 = _interopRequireDefault(_color);
 
@@ -16524,11 +16524,11 @@ var _react = __webpack_require__(0);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _propTypes = __webpack_require__(1);
+var _propTypes = __webpack_require__(2);
 
 var _propTypes2 = _interopRequireDefault(_propTypes);
 
-var _reactcss = __webpack_require__(2);
+var _reactcss = __webpack_require__(1);
 
 var _reactcss2 = _interopRequireDefault(_reactcss);
 
@@ -16625,11 +16625,11 @@ var _react = __webpack_require__(0);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _propTypes = __webpack_require__(1);
+var _propTypes = __webpack_require__(2);
 
 var _propTypes2 = _interopRequireDefault(_propTypes);
 
-var _reactcss = __webpack_require__(2);
+var _reactcss = __webpack_require__(1);
 
 var _reactcss2 = _interopRequireDefault(_reactcss);
 
@@ -16717,7 +16717,7 @@ var _react = __webpack_require__(0);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _reactcss = __webpack_require__(2);
+var _reactcss = __webpack_require__(1);
 
 var _reactcss2 = _interopRequireDefault(_reactcss);
 
@@ -16828,7 +16828,7 @@ var _react = __webpack_require__(0);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _reactcss = __webpack_require__(2);
+var _reactcss = __webpack_require__(1);
 
 var _reactcss2 = _interopRequireDefault(_reactcss);
 
@@ -16899,7 +16899,7 @@ var _react = __webpack_require__(0);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _reactcss = __webpack_require__(2);
+var _reactcss = __webpack_require__(1);
 
 var _reactcss2 = _interopRequireDefault(_reactcss);
 
@@ -16940,11 +16940,11 @@ var _react = __webpack_require__(0);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _propTypes = __webpack_require__(1);
+var _propTypes = __webpack_require__(2);
 
 var _propTypes2 = _interopRequireDefault(_propTypes);
 
-var _reactcss = __webpack_require__(2);
+var _reactcss = __webpack_require__(1);
 
 var _reactcss2 = _interopRequireDefault(_reactcss);
 
@@ -16956,7 +16956,7 @@ var _merge = __webpack_require__(5);
 
 var _merge2 = _interopRequireDefault(_merge);
 
-var _color = __webpack_require__(8);
+var _color = __webpack_require__(9);
 
 var _color2 = _interopRequireDefault(_color);
 
@@ -17072,7 +17072,7 @@ var _react = __webpack_require__(0);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _reactcss = __webpack_require__(2);
+var _reactcss = __webpack_require__(1);
 
 var _reactcss2 = _interopRequireDefault(_reactcss);
 
@@ -17138,11 +17138,11 @@ var _react = __webpack_require__(0);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _reactcss = __webpack_require__(2);
+var _reactcss = __webpack_require__(1);
 
 var _reactcss2 = _interopRequireDefault(_reactcss);
 
-var _color = __webpack_require__(8);
+var _color = __webpack_require__(9);
 
 var _color2 = _interopRequireDefault(_color);
 
@@ -17295,11 +17295,11 @@ var _react = __webpack_require__(0);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _propTypes = __webpack_require__(1);
+var _propTypes = __webpack_require__(2);
 
 var _propTypes2 = _interopRequireDefault(_propTypes);
 
-var _reactcss = __webpack_require__(2);
+var _reactcss = __webpack_require__(1);
 
 var _reactcss2 = _interopRequireDefault(_reactcss);
 
@@ -17311,7 +17311,7 @@ var _merge = __webpack_require__(5);
 
 var _merge2 = _interopRequireDefault(_merge);
 
-var _color = __webpack_require__(8);
+var _color = __webpack_require__(9);
 
 var _color2 = _interopRequireDefault(_color);
 
@@ -17539,7 +17539,7 @@ var react_dom = __webpack_require__(20);
 var react_dom_default = /*#__PURE__*/__webpack_require__.n(react_dom);
 
 // EXTERNAL MODULE: ./node_modules/prop-types/index.js
-var prop_types = __webpack_require__(1);
+var prop_types = __webpack_require__(2);
 var prop_types_default = /*#__PURE__*/__webpack_require__.n(prop_types);
 
 // CONCATENATED MODULE: ./node_modules/react-redux/es/components/Context.js
@@ -18139,7 +18139,7 @@ function shallowEqual(objA, objB) {
   return true;
 }
 // EXTERNAL MODULE: ./node_modules/redux/es/redux.js
-var redux = __webpack_require__(10);
+var redux = __webpack_require__(7);
 
 // CONCATENATED MODULE: ./node_modules/react-redux/es/utils/isPlainObject.js
 /**
@@ -18923,14 +18923,62 @@ function selectedCanvasSize() {
 /* harmony default export */ var resizeReducers = (Object(redux["combineReducers"])({
   selectedCanvasSize: selectedCanvasSize
 }));
+// CONCATENATED MODULE: ./src/components/page/canvas/canvasActions.js
+var SET_CANVAS = 'SET_CANVAS';
+
+var canvasActions_setCanvas = function setCanvas(payload) {
+  return {
+    type: SET_CANVAS,
+    payload: payload
+  };
+};
+
+var canvasActions_actions = {
+  setCanvas: canvasActions_setCanvas
+};
+var canvasActions_types = {
+  SET_CANVAS: SET_CANVAS
+};
+// CONCATENATED MODULE: ./src/components/page/canvas/canvasReducers.js
+function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _nonIterableSpread(); }
+
+function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance"); }
+
+function _iterableToArray(iter) { if (Symbol.iterator in Object(iter) || Object.prototype.toString.call(iter) === "[object Arguments]") return Array.from(iter); }
+
+function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = new Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } }
+
+
+
+
+function canvas() {
+  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];
+  var action = arguments.length > 1 ? arguments[1] : undefined;
+
+  switch (action.type) {
+    case canvasActions_types.SET_CANVAS:
+      return [].concat(_toConsumableArray(state.filter(function (s) {
+        return s.frame !== action.payload.frame;
+      })), [action.payload]);
+
+    default:
+      return state;
+  }
+}
+
+/* harmony default export */ var canvasReducers = (Object(redux["combineReducers"])({
+  canvas: canvas
+}));
 // CONCATENATED MODULE: ./src/rootReducer.js
+
 
 
 
 
 var reducer = Object(redux["combineReducers"])({
   tools: toolsReducers,
-  size: resizeReducers
+  size: resizeReducers,
+  canvas: canvasReducers
 });
 var rootReducer_store = Object(redux["createStore"])(reducer, Object(redux_devtools_extension["composeWithDevTools"])());
 /* harmony default export */ var rootReducer = (rootReducer_store);
@@ -21303,7 +21351,7 @@ var page = __webpack_require__(123);
 var tools = __webpack_require__(124);
 
 // EXTERNAL MODULE: ./node_modules/reactcss/lib/index.js
-var reactcss_lib = __webpack_require__(2);
+var reactcss_lib = __webpack_require__(1);
 var reactcss_lib_default = /*#__PURE__*/__webpack_require__.n(reactcss_lib);
 
 // EXTERNAL MODULE: ./node_modules/react-color/lib/index.js
@@ -22141,7 +22189,7 @@ var frames_list_mapStateToProps = function mapStateToProps(state) {
 
 /* harmony default export */ var frames_list_frames_list = (connect_connect(frames_list_mapStateToProps)(frames_list_Frames));
 // EXTERNAL MODULE: ./src/components/page/canvas/canvas.scss
-var canvas = __webpack_require__(288);
+var canvas_canvas = __webpack_require__(288);
 
 // CONCATENATED MODULE: ./src/components/page/canvas/canvas.jsx
 function canvas_typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { canvas_typeof = function _typeof(obj) { return typeof obj; }; } else { canvas_typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return canvas_typeof(obj); }
@@ -22640,9 +22688,11 @@ function (_React$Component) {
     value: function componentDidUpdate(prevProps, prevState, snapshot) {
       var canvas = this.canvasRef.current;
       var ctx = canvas.getContext('2d');
+      var previewImageChanged = this.props.previewImageChanged;
 
       if (snapshot && snapshot.canvasBeforeResize && canvas) {
         ctx.putImageData(snapshot.canvasBeforeResize, 0, 0);
+        previewImageChanged(ctx.getImageData(0, 0, this.canvasRef.current.width, this.canvasRef.current.height), this.lastFrame);
       }
 
       if (this.lastFrame !== this.state.count) {
@@ -22654,11 +22704,12 @@ function (_React$Component) {
         } else {
           this.paintAllCanvas(true);
         }
+
+        previewImageChanged(ctx.getImageData(0, 0, this.canvasRef.current.width, this.canvasRef.current.height), this.lastFrame);
       }
 
       this.initCanvas();
-    } // fix
-
+    }
   }, {
     key: "getSnapshotBeforeUpdate",
     value: function getSnapshotBeforeUpdate(prevProps, prevState) {
@@ -22727,7 +22778,7 @@ var canvas_mapStateToProps = function mapStateToProps(state) {
   };
 };
 
-/* harmony default export */ var canvas_canvas = (connect_connect(canvas_mapStateToProps)(canvas_Canvas));
+/* harmony default export */ var page_canvas_canvas = (connect_connect(canvas_mapStateToProps)(canvas_Canvas));
 // EXTERNAL MODULE: ./src/components/page/preview/preview.scss
 var preview = __webpack_require__(289);
 
@@ -22752,10 +22803,11 @@ function preview_setPrototypeOf(o, p) { preview_setPrototypeOf = Object.setProto
 
 function preview_defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
+/* eslint-disable react/destructuring-assignment */
+
 /* eslint-disable react/prop-types */
 
 /* eslint-disable jsx-a11y/click-events-have-key-events */
-
 
 
 
@@ -22778,34 +22830,47 @@ function (_React$PureComponent) {
       }
 
       _this.intervalID = setInterval(function () {
-        if (_this.curframe > _this.framesArr.length) {
+        if (_this.curframe > _this.props.canvas.length) {
           _this.curframe = 1;
         }
 
-        var contains = false;
-        var frame = null;
+        var frame = _this.props.canvas.find(function (c) {
+          return c.frame === _this.curframe;
+        });
 
-        for (var i = 0; i < _this.framesArr.length; i += 1) {
-          if (_this.framesArr[i].num === _this.curframe) {
-            contains = true;
-            frame = _this.framesArr[i].img;
+        if (frame != null) {
+          var canvas = _this.canvasRef.current;
+
+          if (canvas != null) {
+            var ctx = canvas.getContext('2d');
+
+            _this.paintAllCanvas();
+
+            ctx.putImageData(frame.image, 0, 0);
+            _this.curframe += 1;
           }
         }
-
-        var canvas = _this.canvasRef.current;
-
-        if (contains === true && canvas != null) {
-          var ctx = canvas.getContext('2d');
-          ctx.putImageData(frame, 0, 0);
-          _this.curframe += 1;
-        }
       }, fps);
+    });
+
+    preview_defineProperty(preview_assertThisInitialized(_this), "paintAllCanvas", function () {
+      var canvas = _this.canvasRef.current;
+      var ctx = canvas.getContext('2d');
+      var id = ctx.createImageData(canvas.width, canvas.height);
+      var d = id.data;
+
+      for (var i = 0; i < canvas.width * canvas.height * 4; i += 1) {
+        d[i] = 0;
+      }
+
+      ctx.putImageData(id, 0, 0);
     });
 
     _this.canvasRef = react_default.a.createRef();
     _this.framesArr = [];
     _this.curframe = 1;
     _this.intervalID = -1;
+    _this.paintAllCanvas = _this.paintAllCanvas.bind(preview_assertThisInitialized(_this));
     return _this;
   }
 
@@ -22813,31 +22878,6 @@ function (_React$PureComponent) {
     key: "componentWillMount",
     value: function componentWillMount() {
       this.startTimer(1000);
-    }
-  }, {
-    key: "componentDidUpdate",
-    value: function componentDidUpdate() {
-      var frameImage = this.props.frameImage;
-      var frameNum = this.props.frameNum;
-
-      if (frameImage !== null && typeof frameImage !== 'undefined') {
-        var contains = false;
-        var frameObj = {
-          num: frameNum,
-          img: frameImage
-        };
-
-        for (var i = 0; i < this.framesArr.length; i += 1) {
-          if (this.framesArr[i].num === frameNum) {
-            contains = true;
-            this.framesArr[i] = frameObj;
-          }
-        }
-
-        if (contains === false) {
-          this.framesArr.push(frameObj);
-        }
-      }
     }
   }, {
     key: "render",
@@ -22884,14 +22924,10 @@ function (_React$PureComponent) {
   return Preview;
 }(react_default.a.PureComponent);
 
-preview_defineProperty(preview_Preview, "propTypes", {
-  frameImage: prop_types_default.a.instanceOf(Object).isRequired,
-  frameNum: prop_types_default.a.number.isRequired
-});
-
 var preview_mapStateToProps = function mapStateToProps(state) {
   return {
-    canvasSize: state.size.selectedCanvasSize
+    canvasSize: state.size.selectedCanvasSize,
+    canvas: state.canvas.canvas
   };
 };
 
@@ -22950,19 +22986,19 @@ function (_React$PureComponent) {
         role: "button",
         tabIndex: "0",
         onClick: function onClick() {
-          _this.props.setSelectedCanvasSize('32');
+          _this.setSelectedCanvasSize('32');
         }
       }, "32x32"), react_default.a.createElement("div", {
         role: "button",
         tabIndex: "0",
         onClick: function onClick() {
-          _this.props.setSelectedCanvasSize('64');
+          _this.setSelectedCanvasSize('64');
         }
       }, "64x64"), react_default.a.createElement("div", {
         role: "button",
         tabIndex: "0",
         onClick: function onClick() {
-          _this.props.setSelectedCanvasSize('128');
+          _this.setSelectedCanvasSize('128');
         }
       }, "128x128"));
     }
@@ -23007,6 +23043,10 @@ function page_setPrototypeOf(o, p) { page_setPrototypeOf = Object.setPrototypeOf
 
 function page_defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
+/* eslint-disable react/prop-types */
+
+/* eslint-disable react/destructuring-assignment */
+
 /* eslint-disable import/extensions */
 
 
@@ -23016,23 +23056,25 @@ function page_defineProperty(obj, key, value) { if (key in obj) { Object.defineP
 
 
 
-var page_Drawing =
+
+
+var page_Page =
 /*#__PURE__*/
 function (_React$PureComponent) {
-  page_inherits(Drawing, _React$PureComponent);
+  page_inherits(Page, _React$PureComponent);
 
-  function Drawing() {
+  function Page() {
     var _getPrototypeOf2;
 
     var _this;
 
-    page_classCallCheck(this, Drawing);
+    page_classCallCheck(this, Page);
 
     for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
       args[_key] = arguments[_key];
     }
 
-    _this = page_possibleConstructorReturn(this, (_getPrototypeOf2 = page_getPrototypeOf(Drawing)).call.apply(_getPrototypeOf2, [this].concat(args)));
+    _this = page_possibleConstructorReturn(this, (_getPrototypeOf2 = page_getPrototypeOf(Page)).call.apply(_getPrototypeOf2, [this].concat(args)));
 
     page_defineProperty(page_assertThisInitialized(_this), "state", {
       image: 'null',
@@ -23049,6 +23091,11 @@ function (_React$PureComponent) {
       _this.setState({
         countCurFrame: countData
       });
+
+      _this.props.setCanvas({
+        image: imageData,
+        frame: countData
+      });
     });
 
     page_defineProperty(page_assertThisInitialized(_this), "setMainCanvas", function (fImage, fCount) {
@@ -23064,7 +23111,7 @@ function (_React$PureComponent) {
     return _this;
   }
 
-  page_createClass(Drawing, [{
+  page_createClass(Page, [{
     key: "render",
     value: function render() {
       var image = this.state.image;
@@ -23077,23 +23124,28 @@ function (_React$PureComponent) {
         image: image,
         countCurFrame: countCurFrame,
         setMainCanvas: this.setMainCanvas
-      }), react_default.a.createElement(canvas_canvas, {
+      }), react_default.a.createElement(page_canvas_canvas, {
         count: count,
         frameImage: frameImage,
         previewImageChanged: this.previewImageChanged
-      }), react_default.a.createElement(preview_preview, {
-        frameImage: image,
-        frameNum: countCurFrame
-      }), react_default.a.createElement(resize_resize, {
+      }), react_default.a.createElement(preview_preview, null), react_default.a.createElement(resize_resize, {
         changeCanvasSize: this.changeCanvasSize
       }));
     }
   }]);
 
-  return Drawing;
+  return Page;
 }(react_default.a.PureComponent);
 
-/* harmony default export */ var page_page = (page_Drawing);
+var page_mapDispatchToProps = function mapDispatchToProps(dispatch) {
+  return {
+    setCanvas: function setCanvas(payload) {
+      return dispatch(canvasActions_actions.setCanvas(payload));
+    }
+  };
+};
+
+/* harmony default export */ var page_page = (connect_connect(null, page_mapDispatchToProps)(page_Page));
 // EXTERNAL MODULE: ./src/components/footer/footer.scss
 var footer = __webpack_require__(291);
 
