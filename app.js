@@ -22025,7 +22025,7 @@ function (_React$PureComponent) {
         role: "button",
         tabIndex: "0",
         onClick: function onClick() {
-          setMainCanvas(_this2.frameImage, count);
+          return setMainCanvas(_this2.frameImage, count);
         }
       }), react_default.a.createElement("div", {
         className: "frames__frame-bottom"
@@ -22042,7 +22042,6 @@ function (_React$PureComponent) {
 
 frame_defineProperty(frame_Child, "propTypes", {
   count: prop_types_default.a.number.isRequired,
-  image: prop_types_default.a.instanceOf(Object).isRequired,
   setMainCanvas: prop_types_default.a.func.isRequired,
   countCurFrame: prop_types_default.a.number.isRequired
 });
@@ -22074,6 +22073,8 @@ function frames_list_inherits(subClass, superClass) { if (typeof superClass !== 
 function frames_list_setPrototypeOf(o, p) { frames_list_setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return frames_list_setPrototypeOf(o, p); }
 
 function frames_list_defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+/* eslint-disable react/forbid-prop-types */
 
 /* eslint-disable react/prop-types */
 
@@ -22108,24 +22109,12 @@ function (_React$PureComponent) {
     _this = frames_list_possibleConstructorReturn(this, (_getPrototypeOf2 = frames_list_getPrototypeOf(Frames)).call.apply(_getPrototypeOf2, [this].concat(args)));
 
     frames_list_defineProperty(frames_list_assertThisInitialized(_this), "state", {
-      numChildren: 1,
-      count: 1,
-      frameImg: null
+      numChildren: 1
     });
 
     frames_list_defineProperty(frames_list_assertThisInitialized(_this), "onAddChild", function () {
       _this.setState({
         numChildren: _this.state.numChildren + 1
-      });
-    });
-
-    frames_list_defineProperty(frames_list_assertThisInitialized(_this), "setMainCanvas", function (fimage, fcount) {
-      _this.setState({
-        count: fcount
-      });
-
-      _this.setState({
-        frameImg: fimage
       });
     });
 
@@ -22150,9 +22139,7 @@ function (_React$PureComponent) {
       this.children = [];
       var image = this.props.image;
       var setMainCanvas = this.props.setMainCanvas;
-      var count = this.state.count;
       var countCurFrame = this.props.countCurFrame;
-      var frameImg = this.state.frameImg;
 
       for (var i = 0; i < this.state.numChildren; i += 1) {
         this.children.push(react_default.a.createElement(frames_list_frame, {
@@ -22161,9 +22148,8 @@ function (_React$PureComponent) {
           image: image,
           countCurFrame: countCurFrame,
           canvasSize: this.props.canvasSize,
-          setMainCanvas: this.setMainCanvas
+          setMainCanvas: setMainCanvas
         }));
-        setMainCanvas(frameImg, count);
       }
 
       return react_default.a.createElement(frames_list_frames, {
@@ -22176,7 +22162,6 @@ function (_React$PureComponent) {
 }(react_default.a.PureComponent);
 
 frames_list_defineProperty(frames_list_Frames, "propTypes", {
-  image: prop_types_default.a.instanceOf(Object).isRequired,
   setMainCanvas: prop_types_default.a.func.isRequired,
   countCurFrame: prop_types_default.a.number.isRequired
 });
@@ -22211,6 +22196,8 @@ function canvas_inherits(subClass, superClass) { if (typeof superClass !== "func
 function canvas_setPrototypeOf(o, p) { canvas_setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return canvas_setPrototypeOf(o, p); }
 
 function canvas_defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+/* eslint-disable react/require-default-props */
 
 /* eslint-disable no-unused-vars */
 
@@ -22766,7 +22753,7 @@ function (_React$Component) {
 canvas_defineProperty(canvas_Canvas, "propTypes", {
   previewImageChanged: prop_types_default.a.func.isRequired,
   count: prop_types_default.a.number.isRequired,
-  frameImage: prop_types_default.a.instanceOf(Object).isRequired
+  frameImage: prop_types_default.a.instanceOf(Object)
 });
 
 var canvas_mapStateToProps = function mapStateToProps(state) {
@@ -22986,19 +22973,19 @@ function (_React$PureComponent) {
         role: "button",
         tabIndex: "0",
         onClick: function onClick() {
-          _this.setSelectedCanvasSize('32');
+          return _this.props.setSelectedCanvasSize('32');
         }
       }, "32x32"), react_default.a.createElement("div", {
         role: "button",
         tabIndex: "0",
         onClick: function onClick() {
-          _this.setSelectedCanvasSize('64');
+          return _this.props.setSelectedCanvasSize('64');
         }
       }, "64x64"), react_default.a.createElement("div", {
         role: "button",
         tabIndex: "0",
         onClick: function onClick() {
-          _this.setSelectedCanvasSize('128');
+          return _this.props.setSelectedCanvasSize('128');
         }
       }, "128x128"));
     }
@@ -23042,6 +23029,8 @@ function page_inherits(subClass, superClass) { if (typeof superClass !== "functi
 function page_setPrototypeOf(o, p) { page_setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return page_setPrototypeOf(o, p); }
 
 function page_defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+/* eslint-disable no-unused-vars */
 
 /* eslint-disable react/prop-types */
 
